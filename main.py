@@ -2,22 +2,20 @@ import datetime
 import os
 import shutil
 import urllib.request
+from random import randint
 from time import sleep
 import schedule
-from GlobalGadgets.InUse.JobsSchedule import schedule_job
 from color_printer import *
 
 ## 0 configure Instagram pages , day & time to post
-from GlobalGadgets.InUse.get_random_post import post_generator
-from GlobalGadgets.InUse.myPostUploader import my_post_uploader
+from instaloader import instaloader
 
 pages4Posts = ["printedbyprusa", "josefprusa", "3dimensionprint", "matterhackers", "cults3d", "creality3d",
                "e3donline", "mosaicpalette", "italy3dprint", "fillamentum", "crazyfilament", "filaments.ca",
                "filamentarno" ,"simplify3d", "miniworld3d", "zimple3d", "all3dp", "esun3dprinting",
                "lc_design_modena", "davidzindustries", "hugo_hth", "the.artgallery__"]
 
-days2post = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
-
+# days2post = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
 
 # def next_minute():
 #     nxt_minute = datetime.datetime.now() + datetime.timedelta(minutes=1)
@@ -27,36 +25,103 @@ days2post = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "
 #     return nxt_minute
 
 # time2post = next_minute()
-time2post = ["01:00", "02:00", "03:00",
-             # "04:00", "05:00", "06:00",
-             # "07:00", "08:00", "09:00",
-             # "10:00", "11:00", "12:00",
-             # "13:00", "14:00", "15:00",
-             # "16:00", "17:00", "18:00",
-             "20:00", "20:05", "20:10i",
-             "19:40", "23:00", "23:59"]
 
-# region On time:
 
 from instabot import Bot
-def main():
-    ## 0. delete config folder to login
-    def clean_start():
-        print("clean_start()")
-        try:
-            shutil.rmtree('config')  # Delete config folder
-            printRed(f"config folder has been deleted...")
-        except:
-            printRed(f"config folder not found...")
 
-        bot = Bot()
-        bot.login(username="spider_modelsx", password="Idan05423")
-        print(f"{bcolors.Yellow}{bcolors.BOLD}Successfully logged in{bcolors.Normal}")
-        return bot
-    bot = clean_start()
+
+## 0. delete config folder to login
+def clean_start():
+    print("clean_start()")
+    try:
+        shutil.rmtree('config')  # Delete config folder
+        printRed(f"config folder has been deleted...")
+    except:
+        printRed(f"config folder not found...")
+
+    _bot = Bot()
+    _bot.login(username="spider_modelsx", password="Idan05423")
+    print(f"{bcolors.Yellow}{bcolors.BOLD}Successfully logged in{bcolors.Normal}")
+    return _bot
+
+bot = clean_start()
+
+def main():
+    printYellow("Start main()")
+    print(bot)
 
     ## 1 Scrape random post from page
     # from the 5 - 50 last posts.
+    def post_generator(pages_list):
+        print("get_rand_post()")
+
+        pages_list_len = len(pages_list)
+        # print("pages_list_len: ", pages_list_len)
+        the_chosen_page = randint(0, pages_list_len - 1)
+        # print("the_chosen_page: ", the_chosen_page)
+
+        L = instaloader.Instaloader()
+
+        # try: L.load_session_from_file("spider_modelsx")
+        # except (ValueError, Exception): L.login("spider_modelsx", "Idan05423")        # (login)
+
+        # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
+        user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
+
+        forIndex = 0
+        the_chosen_post = randint(0, 49)
+        print("the_chosen_post: ", the_chosen_post)
+        for post in user:
+            forIndex += 1
+            # print(forIndex)
+            if forIndex != the_chosen_post:  # (When...)
+                pass
+            else:
+                print(post.url)
+                # region post prints
+                # print("post.get_is_videos()")
+                # print(post.get_is_videos())
+                # print("post.video_url")
+                # print(post.video_url)
+                # print("X___X___X___X___X___X___X___X___")
+                # print("post.shortcode")
+                # print(post.shortcode)
+                # print("My link 2 Post")
+                # print(f"https://www.instagram.com/p/{post.shortcode}/")
+                # print("post.mediacount")
+                # print(post.mediacount)
+                # print("post.mediaid")
+                # print(post.mediaid)
+                ## print(post.mediaid_to_shortcode())
+                ## print(post.shortcode_to_mediaid())
+                # print("X___X___X___X___X___X___X___X___")
+                # print("post.owner_username")
+                # print(post.owner_username)
+                # print("post.title")
+                # print(post.title)
+                # print("post.url")
+                # print(post.url)
+                # print("post.caption_hashtags")
+                # print(post.caption_hashtags)
+                # print("post.caption_mentions")
+                # print(post.caption_mentions)
+                # print("X___X___X___X___X___X___X___X___")
+                # print("post.caption")
+                # print(post.caption)
+                # endregion post prints
+                return post.owner_username, \
+                       post.shortcode, \
+                       f"https://www.instagram.com/p/{post.shortcode}/", \
+                       post.url, \
+                       post.get_is_videos(), \
+                       post.video_url, \
+                       post.mediacount, \
+                       post.mediaid, \
+                       post.caption_hashtags, \
+                       post.caption_mentions, \
+                       post.caption
+        #     L.download_post(post, target='stabilo')
+        # print(forIndex)
     post_data = post_generator(pages4Posts)
     # print(post_data)
     # region map scrape
@@ -88,31 +153,24 @@ def main():
     upload_now()
 
 main()
-print("Done main() 1st")
-sleep(5)
-print("Slept 5 sec...")
-sleep(5)
-print("Slept 10 sec...")
-print("Start main() 2st")
 main()
-print("Done main() 2st")
+schedule.every(2).hours.do(main)
+# schedule.every(10).seconds.do(job)
+# schedule.every(10).minutes.do(job)
+# schedule.every().hour.do(job)
+# schedule.every().day.at("10:30").do(job)
+# schedule.every(5).to(10).minutes.do(job)
+# schedule.every().monday.do(job)
+# schedule.every().wednesday.at("13:15").do(job)
+# schedule.every().minute.at(":17").do(job)
 
-
-
-# for hour in time2post:
-#     schedule_job(someDay="sunday",
-#                  someTime=hour,
-#                  someDef=main)
-
-# endregion On time:
-
-# whileIndex = 0
-# while True:
+whileIndex = 0
+while True:
     # looking for pending
-    # schedule.run_pending()
-    # sleep(30)
-    # whileIndex += 1
-    # print(f"{whileIndex} Still alive...",  datetime.datetime.now().strftime("%H:%M.%S"))
+    schedule.run_pending()
+    sleep(30)
+    whileIndex += 1
+    print(f"{whileIndex} Still alive...",  datetime.datetime.now().strftime("%H:%M.%S"))
 
 
 
