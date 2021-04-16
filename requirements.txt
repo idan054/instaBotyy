@@ -1,0 +1,5 @@
+schedule~=1.1.0
+instaloader~=4.7.1
+instabot~=0.117.0
+requests~=2.25.1
+mailer~=0.8.1
