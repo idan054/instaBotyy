@@ -1,177 +1,92 @@
-import datetime
-import shutil
-from random import randint
+import telegram_send
+from GlobalGadgets.TelegramPrinter import telegram_printer
 from time import sleep
+import datetime
 import schedule
-# from color_printer import *
-# region color_printer
+import sys
 
+## Values
+from GlobalGadgets.googleDrive import g_drive_upload
 
-# delete dist folder
-# run py setup.py sdist
-
-# endregion color_printer
-
-## 0 configure Instagram pages , day & time to post
-from instaloader import instaloader
-
-pages4Posts = ["printedbyprusa", "josefprusa", "3dimensionprint", "matterhackers", "cults3d", "creality3d",
-               "e3donline", "mosaicpalette", "italy3dprint", "fillamentum", "crazyfilament", "filaments.ca",
-               "filamentarno" ,"simplify3d", "miniworld3d", "zimple3d", "all3dp", "esun3dprinting",
-               "lc_design_modena", "davidzindustries", "hugo_hth"]
-
-# days2post = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
-
-# def next_minute():
-#     nxt_minute = datetime.datetime.now() + datetime.timedelta(minutes=1)
-#     nxt_minute = nxt_minute.strftime("%H:%M")
-#     # print(nxt_minute.strftime("%d/%m/%Y %H:%M:%S"))
-#     print("nxt_minute: ", nxt_minute)
-#     return nxt_minute
-
-# time2post = next_minute()
-
-
-from instabot import Bot
-
-
-## 0. delete config folder to login
-def clean_start():
-    print("clean_start()")
-    try:
-        # print("try!")
-        shutil.rmtree('config')  # Delete config folder
-        print(f"config folder has been deleted...")
-        # printRed(f"config folder has been deleted...")
-    except:
-        print(f"config folder not found...")
-        # printRed(f"config folder not found...")
-
-    _bot = Bot()
-    _bot.login(username="spider3d_models", password="Idan05423")
-    # _bot.login(username="3deal.com_", password="3deal3252")
-    print(f"Successfully logged in")
-    # printYellow(f"Successfully logged in")
-    return _bot
-
-bot = clean_start()
+USERNAME = "spider3d_models"
+PASSWORD = "Idan05423"
+minutesPast_sinceLaunch = 0
+postIndex = 0
 
 def main():
-    print("Start main()")
-    # printYellow("Start main()")
-    print(bot)
+    log = input("Enable log .txt (y/n)")
+    if log == "y" or log == "Y":
+        log = True
+    else:
+        log = False
+    print(log)
 
-    ## 1 Scrape random post from page
-    # from the 5 - 50 last posts.
-    def post_generator(pages_list):
-        print("get_rand_post()")
+    current_time = datetime.datetime.now().strftime("%d.%m.%Y %H.%M.%S")
+    if log: sys.stdout = open(f"instaBotyy_log_{str(current_time)}.txt", "w", encoding='utf-8')
 
-        pages_list_len = len(pages_list)
-        # print("pages_list_len: ", pages_list_len)
-        the_chosen_page = randint(0, pages_list_len - 1)
-        # print("the_chosen_page: ", the_chosen_page)
+    try:
+        print("Start main()")
 
-        L = instaloader.Instaloader()
+        from Lib.I_CleanStart import clean_start
+        ## 1. delete config folder & login
+        bot = clean_start(USERNAME, PASSWORD)
+        print(bot)
 
-        # try: L.load_session_from_file("spider_modelsx")
-        L.login(user="3deal.com_", passwd="3deal3252")
-        # L.login(user="spider3d_models", passwd="Idan05423")
-        print("L.login() Done")
 
-        # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
-        user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
+        from Lib.II_postGenerator import post_generator
+        post_data = post_generator(USERNAME)  # Get list of all the pages this user follow on
+        ## 2. Mapped post data
+        # print(post_data)
+        # region map scrape
+        page_username = post_data[0]
+        shortcode = post_data[1]
+        original_link = post_data[2]
+        photo_link = post_data[3]
+        is_videos = post_data[4]
+        video_link = post_data[5]
+        media_counter = post_data[6]
+        media_id = post_data[7]
+        caption_hashtags = post_data[8]
+        caption_mentions = post_data[9]
+        post_caption = post_data[10]
+        # endregion map scrape
 
-        forIndex = 0
-        the_chosen_post = randint(0, 49)
-        print("the_chosen_post: ", the_chosen_post)
-        for post in user:
-            forIndex += 1
-            # print(forIndex)
-            if forIndex != the_chosen_post:  # (When...)
-                pass
-            else:
-                print(post.url)
-                # region post prints
-                # print("post.get_is_videos()")
-                # print(post.get_is_videos())
-                # print("post.video_url")
-                # print(post.video_url)
-                # print("X___X___X___X___X___X___X___X___")
-                # print("post.shortcode")
-                # print(post.shortcode)
-                # print("My link 2 Post")
-                # print(f"https://www.instagram.com/p/{post.shortcode}/")
-                # print("post.mediacount")
-                # print(post.mediacount)
-                # print("post.mediaid")
-                # print(post.mediaid)
-                ## print(post.mediaid_to_shortcode())
-                ## print(post.shortcode_to_mediaid())
-                # print("X___X___X___X___X___X___X___X___")
-                # print("post.owner_username")
-                # print(post.owner_username)
-                # print("post.title")
-                # print(post.title)
-                # print("post.url")
-                # print(post.url)
-                # print("post.caption_hashtags")
-                # print(post.caption_hashtags)
-                # print("post.caption_mentions")
-                # print(post.caption_mentions)
-                # print("X___X___X___X___X___X___X___X___")
-                # print("post.caption")
-                # print(post.caption)
-                # endregion post prints
-                return post.owner_username, \
-                       post.shortcode, \
-                       f"https://www.instagram.com/p/{post.shortcode}/", \
-                       post.url, \
-                       post.get_is_videos(), \
-                       post.video_url, \
-                       post.mediacount, \
-                       post.mediaid, \
-                       post.caption_hashtags, \
-                       post.caption_mentions, \
-                       post.caption
-        #     L.download_post(post, target='stabilo')
-        # print(forIndex)
-    post_data = post_generator(pages4Posts)
-    # print(post_data)
-    # region map scrape
-    page_username = post_data[0]
-    shortcode = post_data[1]
-    original_link = post_data[2]
-    photo_link = post_data[3]
-    is_videos = post_data[4]
-    video_link = post_data[5]
-    media_counter = post_data[6]
-    media_id = post_data[7]
-    caption_hashtags = post_data[8]
-    caption_mentions = post_data[9]
-    post_caption = post_data[10]
-    # endregion map scrape
+        from Lib.III_UploadPost import upload_post
+        ## 3. Delete REMOVE_ME & Upload the chosen post
+        post_code = upload_post(bot=bot,
+                                photo_link=photo_link,
+                                post_caption=post_caption,
+                                page_username=page_username)  # for credit
+        ## 4. Telegram update
+        global postIndex
+        postIndex += 1
+        telegram_printer(
+            f"https://www.instagram.com/p/{post_code}/\n{postIndex} post Already upload since launch ({int(minutesPast_sinceLaunch / 60)} hours ago)")
+        telegram_printer(f"instaBotyy run on pythonAnywhere\n{current_time}")
+    except:
+        ## Export failure log to Gdrive & Send Telegram msg
+        if log:
+            sys.stdout.close()  # Close instaBotyy_log_{current_time}.txt
+            sys.stdout = open("googleDriveLink.txt", "w", encoding='utf-8')
 
-    def upload_now():
-        try:
-            print('Delete "LastedPhoto.jpg.REMOVE_ME"')
-            import os
-            os.remove('LastedPhoto.jpg.REMOVE_ME')
-        except:
-            print('Error Delete "LastedPhoto.jpg.REMOVE_ME"')
+            # link = g_drive_upload(file2upload=f"instaBotyy_log_{str(current_time)}.txt")
+            link = ""
+            print(link)
+            telegram_printer(f"""WOW. something went wrong throw this upload.\nLuck everything on try except (:
+{current_time}
 
-        import urllib.request
-        # photo_link = "https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/173546894_280575686881839_2838246774201218328_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=YpvNzQ3O4KwAX9hRIBy&edm=ALQROFkAAAAA&ccb=7-4&oh=604305744dd5d8cce792c6f093465488&oe=60A0E6D9&_nc_sid=30a2ef&ig_cache_key=MjU1MzM1Njc4NDQzNjE2OTUwNg%3D%3D.2-ccb7-4"
-        urllib.request.urlretrieve(f"{photo_link}", "LastedPhoto.jpg")
+Log of failure main() session:
+{link}""")
+        else:
+            telegram_printer(f"WOW. something went wrong throw this upload.\nLuck everything on try except (:")
 
-        bot.upload_photo("LastedPhoto.jpg",
-                         caption=f"""{post_caption}
-                                     post credit: @{page_username}""")
-    upload_now()
+
+        sys.stdout.close()  # Close SpiderSticker_log.txt
 
 main()
+schedule.every(60).to(90).minutes.do(main)
 # schedule.every(2).hours.do(main)
 # schedule.every(90).minutes.do(main)
-schedule.every(60).to(90).minutes.do(main)
 # schedule.every(10).seconds.do(job)
 # schedule.every(10).minutes.do(job)
 # schedule.every().hour.do(job)
@@ -180,15 +95,16 @@ schedule.every(60).to(90).minutes.do(main)
 # schedule.every().wednesday.at("13:15").do(job)
 # schedule.every().minute.at(":17").do(job)
 
-whileIndex = 0
 while True:
     # looking for pending
     schedule.run_pending()
     sleep(60)
-    whileIndex += 1
-    print(f"{whileIndex} minutes past. Still alive...",  datetime.datetime.now().strftime("%H:%M.%S"))
-    # printYellow(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
-    print(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
+    minutesPast_sinceLaunch += 1
+
+    if minutesPast_sinceLaunch % 10 == 0 : # returns true ONLY if X is an exact multiple of Y (30/10 = True | 3/10 = False)
+        print(f"{minutesPast_sinceLaunch} minutes past. Still alive...", datetime.datetime.now().strftime("%H:%M.%S"))
+        # printYellow(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
+        print(f"{int(postIndex + 1)} Posts already uploaded!")
 
 
 

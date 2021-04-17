@@ -1,0 +1,27 @@
+Start main()
+clean_start()
+No clean_logs()
+config folder has been deleted...
+Successfully logged in
+<instabot.bot.bot.Bot object at 0x0000022707F95E80>
+Start post_generator()
+Login 3deal.com_ ....
+L.login() Done
+pages list from "following" spider3d_models:
+['printedbyprusa', 'creality3d', 'cults3d', 'marsgizmo', 'hugo_hth', 'davidzindustries', 'lc_design_modena', 'esun3dprinting', 'all3dp', 'zimple3d', '3lobitprint', 'miniworld3d', 'simplify3d', 'filamentarno', 'filaments.ca', 'crazyfilament', 'fillamentum', 'italy3dprint', 'mosaicpalette', 'matterhackers', '3dimensionprint', 'josefprusa']
+the_chosen_page:  3
+the_chosen_post:  46
+https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/159956815_434219547638565_8025113013915392060_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=a0rOxqJ6N54AX_XAIT_&edm=ALQROFkAAAAA&ccb=7-4&oh=61996b03fcaeb8f654ec3ca62bb65244&oe=60A22C10&_nc_sid=30a2ef&ig_cache_key=MjUyOTUzMTk2MjgzMzI3NjI0Mw%3D%3D.2-ccb7-4
+Delete "LastedPhoto.jpg.REMOVE_ME"
+FOUND: w:1080 h:1080 r:1.0
+response: 
+----------------------------
+Also available on Telegram:
+https://www.instagram.com/p/CNxu4Mmpdsg/
+1 post Already upload since launch (0 hours ago)
+----------------------------
+----------------------------
+Also available on Telegram:
+instaBotyy run on pythonAnywhere
+17.04.2021 21.24.56
+----------------------------
