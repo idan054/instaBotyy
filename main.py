@@ -14,15 +14,9 @@ minutesPast_sinceLaunch = 0
 postIndex = 0
 
 def main():
-    log = input("Enable log .txt (y/n)")
-    if log == "y" or log == "Y":
-        log = True
-    else:
-        log = False
-    print(log)
 
-    current_time = datetime.datetime.now().strftime("%d.%m.%Y %H.%M.%S")
-    if log: sys.stdout = open(f"instaBotyy_log_{str(current_time)}.txt", "w", encoding='utf-8')
+    current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    # current_time = datetime.datetime.now().strftime("%d.%m.%Y %H.%M.%S")
 
     try:
         print("Start main()")
@@ -65,24 +59,9 @@ def main():
         telegram_printer(f"instaBotyy run on pythonAnywhere\n{current_time}")
     except:
         ## Export failure log to Gdrive & Send Telegram msg
-        if log:
-            sys.stdout.close()  # Close instaBotyy_log_{current_time}.txt
-            sys.stdout = open("googleDriveLink.txt", "w", encoding='utf-8')
+        telegram_printer(f"WOW. something went wrong throw this upload.\nLuck everything on try except (:")
 
-            # link = g_drive_upload(file2upload=f"instaBotyy_log_{str(current_time)}.txt")
-            link = ""
-            print(link)
-            telegram_printer(f"""WOW. something went wrong throw this upload.\nLuck everything on try except (:
-{current_time}
-
-Log of failure main() session:
-{link}""")
-        else:
-            telegram_printer(f"WOW. something went wrong throw this upload.\nLuck everything on try except (:")
-
-
-        sys.stdout.close()  # Close SpiderSticker_log.txt
-
+main()
 main()
 schedule.every(60).to(90).minutes.do(main)
 # schedule.every(2).hours.do(main)
