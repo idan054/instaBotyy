@@ -16,3 +16,4 @@ while True:
     current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     telegram_printer(f"Amazon AWS Ubuntu20 A Still Alive\n{current_time}")
     sleep(60)
+
