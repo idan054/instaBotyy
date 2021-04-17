@@ -1,98 +1,10 @@
 import datetime
-import os
 import shutil
-import urllib.request
 from random import randint
 from time import sleep
 import schedule
 # from color_printer import *
 # region color_printer
-
-class bcolors:
-    Normal = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-
-    White = '\033[97m'
-    Purple = '\033[95m'
-    Blue = '\033[94m'
-    Yellow = '\033[93m'
-    Green = '\033[92m'
-    Red = '\033[91m'
-    Grey = '\033[90m'
-# print(f'{bcolors.Green}User "{bcolors.BOLD}Arik{bcolors.Normal}{bcolors.Green}" Added!{bcolors.Normal}')
-
-def printPurple(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Purple}{text}{bcolors.Normal}")
-
-def printBlue(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Blue}{text}{bcolors.Normal}")
-
-def printYellow(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Yellow}{text}{bcolors.Normal}")
-
-def printGreen(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Green}{text}{bcolors.Normal}")
-
-def printRed(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Red}{text}{bcolors.Normal}")
-
-def printGrey(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.Grey}{text}{bcolors.Normal}")
-
-def printBold(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.BOLD}{text}{bcolors.Normal}")
-
-def printUnderline(text):
-    """
-    Parameters
-    ----------
-    text : str
-        the text value from user
-    """
-    print(f"{bcolors.UNDERLINE}{text}{bcolors.Normal}")
 
 
 # delete dist folder
@@ -136,8 +48,8 @@ def clean_start():
         # printRed(f"config folder not found...")
 
     _bot = Bot()
-    # _bot.login(username="3deal.com_", password="Idan05423")
-    _bot.login(username="spider_modelsx", password="Idan05423")
+    _bot.login(username="spider3d_models", password="Idan05423")
+    # _bot.login(username="3deal.com_", password="3deal3252")
     print(f"Successfully logged in")
     # printYellow(f"Successfully logged in")
     return _bot
@@ -145,7 +57,8 @@ def clean_start():
 bot = clean_start()
 
 def main():
-    printYellow("Start main()")
+    print("Start main()")
+    # printYellow("Start main()")
     print(bot)
 
     ## 1 Scrape random post from page
@@ -161,7 +74,9 @@ def main():
         L = instaloader.Instaloader()
 
         # try: L.load_session_from_file("spider_modelsx")
-        # except (ValueError, Exception): L.login("spider_modelsx", "Idan05423")        # (login)
+        L.login(user="3deal.com_", passwd="3deal3252")
+        # L.login(user="spider3d_models", passwd="Idan05423")
+        print("L.login() Done")
 
         # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
         user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
@@ -239,10 +154,13 @@ def main():
     def upload_now():
         try:
             print('Delete "LastedPhoto.jpg.REMOVE_ME"')
+            import os
             os.remove('LastedPhoto.jpg.REMOVE_ME')
         except:
             print('Error Delete "LastedPhoto.jpg.REMOVE_ME"')
 
+        import urllib.request
+        # photo_link = "https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/173546894_280575686881839_2838246774201218328_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=YpvNzQ3O4KwAX9hRIBy&edm=ALQROFkAAAAA&ccb=7-4&oh=604305744dd5d8cce792c6f093465488&oe=60A0E6D9&_nc_sid=30a2ef&ig_cache_key=MjU1MzM1Njc4NDQzNjE2OTUwNg%3D%3D.2-ccb7-4"
         urllib.request.urlretrieve(f"{photo_link}", "LastedPhoto.jpg")
 
         bot.upload_photo("LastedPhoto.jpg",
@@ -251,7 +169,6 @@ def main():
     upload_now()
 
 main()
-# main()
 # schedule.every(2).hours.do(main)
 # schedule.every(90).minutes.do(main)
 schedule.every(60).to(90).minutes.do(main)
@@ -270,7 +187,8 @@ while True:
     sleep(60)
     whileIndex += 1
     print(f"{whileIndex} minutes past. Still alive...",  datetime.datetime.now().strftime("%H:%M.%S"))
-    printYellow(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
+    # printYellow(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
+    print(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
 
 
 

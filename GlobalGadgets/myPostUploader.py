@@ -102,14 +102,12 @@ def my_post_uploader(insta_user, insta_pass,
     # actual_upload()
 
 # Example to upload
-# username_and_pass = input("Insert username & pass to upload separate with comma (,)") or "spider_modelsx, Idan05423"
 # username_and_pass = username_and_pass.replace(" ", "")  # Delete space
 # username_and_pass_list = username_and_pass.split(",")
 # _insta_user = username_and_pass_list[0]
 # _insta_pass = username_and_pass_list[1]
 # print(_insta_pass, "\n", _insta_user)
 
-# my_post_uploader(insta_user="spider_modelsx", insta_pass="Idan05423",
 #                  pic_link="https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/117288562_184485233064298_4856013453274475790_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=110&_nc_ohc=UxuDsiuXhikAX8Sr4PR&edm=APU89FAAAAAA&ccb=7-4&oh=bd121037a1f39c611965240d860e5759&oe=60752C66&_nc_sid=86f79a",
 #                  original_post_desc="caption_for_photo",
 #                  page_profile="nikiii")

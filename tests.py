@@ -1,22 +1,18 @@
-import sys
+#1. go to this adress: https://telegram.me/BotFather and follow the instructions
+#2. in terminal: pip install telegram-send followed by telegram-send configure
+import datetime
+from time import sleep
+import telegram_send
+
+def telegram_printer(text):
+    print("----------------------------")
+    print("Also availble on Telegram:")
+    print(text)
+    telegram_send.send(messages=[text])
+    print("----------------------------")
 
 
-def add(a, b):
-  return a + b
-
-
-"""
-You need to execute the script add.py as follows:
-'python add.py 5 2'
-The 'sys.argv[0]' is the name of your script,
-so you need to get the second and the third one.
-"""
-
-print(
-    add(int(sys.argv[1]), int(sys.argv[2]))
-)
-
-"""
-With the command: 'python add.py 5 2',
-this python script will returns 7
-"""
+while True:
+    current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    telegram_printer(f"Amazon AWS Ubuntu20 A Still Alive\n{current_time}")
+    sleep(60)

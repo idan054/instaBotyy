@@ -13,7 +13,6 @@ def post_generator(pages_list):
     L = instaloader.Instaloader()
 
     # try: L.load_session_from_file("spider_modelsx")
-    # except (ValueError, Exception): L.login("spider_modelsx", "Idan05423")        # (login)
 
     # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
     user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()

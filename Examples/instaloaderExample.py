@@ -7,10 +7,11 @@ print("Start")
 L = instaloader.Instaloader()
 
 # try: L.load_session_from_file("spider_modelsx")
-# except (ValueError, Exception): L.login("spider_modelsx", "Idan05423")        # (login)
+L.login(user="3deal.com_", passwd="3deal3252")
+print("L.login() Done")
 
 # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
-user = instaloader.Profile.from_username(L.context, "spider_modelsx").get_posts()
+user = instaloader.Profile.from_username(L.context, "spider3d_models").get_posts()
 # for post in user:
 #     L.download_post(post, target='stabilo')
 
