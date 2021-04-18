@@ -62,10 +62,9 @@ def main():
         telegram_printer(f"WOW. something went wrong throw this upload.\nLuck everything on try except (:")
 
 main()
-main()
-schedule.every(60).to(90).minutes.do(main)
+schedule.every(10).minutes.do(main)
+# schedule.every(60).to(90).minutes.do(main)
 # schedule.every(2).hours.do(main)
-# schedule.every(90).minutes.do(main)
 # schedule.every(10).seconds.do(job)
 # schedule.every(10).minutes.do(job)
 # schedule.every().hour.do(job)
