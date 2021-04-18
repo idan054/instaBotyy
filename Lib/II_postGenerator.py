@@ -19,20 +19,20 @@ def post_generator(username): # Get list of all the pages this user follow on
     for page in pages_data:
         pages_list.append(page.username)
 
-    print(f'pages list from "following" {username}:')
-    print(pages_list)
+    # print(f' pages list from "following" {username}:')
+    # print(pages_list)
 
     pages_list_len = len(pages_list)
-    # print("pages_list_len: ", pages_list_len)
+    print("pages_list_len: ", pages_list_len)
 
-    the_chosen_page = randint(0, pages_list_len - 1)
+    the_chosen_page = randint(1, pages_list_len - 1)
     print("the_chosen_page: ", the_chosen_page)
 
     # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
     user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
 
     forIndex = 0
-    the_chosen_post = randint(0, 49)
+    the_chosen_post = randint(2, 49)
     print("the_chosen_post: ", the_chosen_post)
 
     for post in user:

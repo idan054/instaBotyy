@@ -78,7 +78,7 @@ def main():
 
         pages_list_len = len(pages_list)
         # print("pages_list_len: ", pages_list_len)
-        the_chosen_page = randint(0, pages_list_len - 1)
+        the_chosen_page = randint(1, pages_list_len - 1)
         # print("the_chosen_page: ", the_chosen_page)
 
         L = instaloader.Instaloader()

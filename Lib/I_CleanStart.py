@@ -3,7 +3,7 @@ import shutil
 from instabot import Bot
 
 ## 1. delete config folder & login
-def clean_start(username, password):
+def clean_start(username, password, sample):
     print("clean_start()")
 
     def clean_logs(): # Clean logs files instaBotyy_log_CURRENT_DATE.txt
@@ -25,10 +25,13 @@ def clean_start(username, password):
     except:
         print(f"config folder not found...")
         # printRed(f"config folder not found...")
+        if sample:
+            _bot = "Sample bot configured!"
+        else:  # On real upload.
+            _bot = Bot()
+            _bot.login(username=username, password=password)
+            # _bot.login(username="3deal.com_", password="3deal3252")
+            print(f"Successfully logged in")
+            # printYellow(f"Successfully logged in")
 
-    _bot = Bot()
-    _bot.login(username=username, password=password)
-    # _bot.login(username="3deal.com_", password="3deal3252")
-    print(f"Successfully logged in")
-    # printYellow(f"Successfully logged in")
     return _bot

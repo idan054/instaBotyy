@@ -7,7 +7,7 @@ def post_generator(pages_list):
 
     pages_list_len = len(pages_list)
     # print("pages_list_len: ", pages_list_len)
-    the_chosen_page = randint(0, pages_list_len-1)
+    the_chosen_page = randint(1, pages_list_len-1)
     # print("the_chosen_page: ", the_chosen_page)
 
     L = instaloader.Instaloader()
@@ -18,7 +18,7 @@ def post_generator(pages_list):
     user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
 
     forIndex = 0
-    the_chosen_post = randint(0, 49)
+    the_chosen_post = randint(2, 49)
     print("the_chosen_post: ", the_chosen_post)
     for post in user:
         forIndex += 1
