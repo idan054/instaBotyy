@@ -27,13 +27,13 @@ def clean_start(username, password, sample):
     except:
         print(f"config folder not found...")
         # printRed(f"config folder not found...")
-        if sample:
-            _bot = "Sample bot configured!"
-        else:  # On real upload.
-            _bot = Bot()
-            _bot.login(username=username, password=password)
-            # _bot.login(username="3deal.com_", password="3deal3252")
-            print(f"Successfully logged in")
-            # printYellow(f"Successfully logged in")
+    if sample:
+        _bot = "Sample bot configured!"
+    else:  # On real upload.
+        _bot = Bot()
+        _bot.login(username=username, password=password)
+        # _bot.login(username="3deal.com_", password="3deal3252")
+        print(f"Successfully logged in")
+        # printYellow(f"Successfully logged in")
 
     return _bot
