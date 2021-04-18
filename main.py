@@ -13,7 +13,15 @@ USERNAME = "spider3d_models"
 PASSWORD = "Idan05423"
 minutesPast_sinceLaunch = 0
 postIndex = 0
+
 isSample = input("ATTENTION! Make a sample run? (y/n)") or "y"
+if isSample == "y" or isSample == "Y":  # "or True" 2 save next runs
+    isSample = True  # Change the True to False
+    print("isSample run:", isSample)  # Because its else then y / Y...
+    print("Start Testing mode!")
+else:
+    isSample = False
+    print("Real LIVE Mode Enabled!")
 
 from Lib.I_CleanStart import clean_start
 ## 0. delete config folder & login
@@ -23,15 +31,6 @@ bot = clean_start(USERNAME, PASSWORD, isSample)  # True / False for is sample up
 def main():
     global isSample
     # print(isSample)
-    if isSample == "y" or isSample == "Y"\
-                       or isSample == True: # "or True" 2 save next runs
-        isSample = True                     # Change the True to False
-        print("isSample run:", isSample)    # Because its else then y / Y...
-        print("Start Testing mode!")
-    else:
-        isSample = False
-        print("Real LIVE Mode Enabled!")
-
     # start_time = datetime.datetime.now()
     # start_time = datetime.datetime.now().strftime("%d.%m.%Y %H.%M.%S")
     start_time = datetime.datetime.now(pytz.FixedOffset(60 * 3))  # (Israel) Every 1 is minute
@@ -108,8 +107,8 @@ else:
     while True:
         # looking for pending
         schedule.run_pending()
-        sleep(6)
-        minutesPast_sinceLaunch += 10
+        sleep(60)
+        minutesPast_sinceLaunch += 1
 
         if minutesPast_sinceLaunch % 10 == 0 : # returns true ONLY if X is an exact multiple of Y (30/10 = True | 3/10 = False)
             print(f"{minutesPast_sinceLaunch} minutes past. Still alive...", datetime.datetime.now().strftime("%H:%M.%S"))
