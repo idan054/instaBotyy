@@ -28,6 +28,9 @@ def post_generator(username): # Get list of all the pages this user follow on
     the_chosen_page = randint(1, pages_list_len - 1)
     print("the_chosen_page: ", the_chosen_page)
 
+    overall_post_option = pages_list_len * 50
+    print("overall_post_options:", overall_post_option)
+
     # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
     user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
 
