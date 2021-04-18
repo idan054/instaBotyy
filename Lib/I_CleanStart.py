@@ -2,8 +2,10 @@ import os
 import shutil
 from instabot import Bot
 
+global _bot
 ## 1. delete config folder & login
 def clean_start(username, password, sample):
+    global _bot
     print("clean_start()")
 
     def clean_logs(): # Clean logs files instaBotyy_log_CURRENT_DATE.txt

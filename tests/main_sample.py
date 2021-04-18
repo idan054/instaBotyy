@@ -7,7 +7,7 @@ import sys
 import pytz
 
 ## Values
-from GlobalGadgets.googleDrive import g_drive_upload
+# from GlobalGadgets.googleDrive import g_drive_upload
 
 USERNAME = "spider3d_models"
 PASSWORD = "Idan05423"
