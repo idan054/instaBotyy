@@ -113,7 +113,8 @@ else:
         if minutesPast_sinceLaunch % 10 == 0 : # returns true ONLY if X is an exact multiple of Y (30/10 = True | 3/10 = False)
             print(f"{minutesPast_sinceLaunch} minutes past. Still alive...", datetime.datetime.now().strftime("%H:%M.%S"))
             # printYellow(f"{int(whileIndex / 30 + 1)} Posts already uploaded!")
-            print(f"{int(postIndex + 1)} Posts already uploaded!")
+            print(f"{int(postIndex)} Posts already uploaded!")
+
 
 
 
