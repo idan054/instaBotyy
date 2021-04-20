@@ -91,7 +91,10 @@ if isSample:
 
 else:
     print(isSample)
-    schedule.every(60).to(90).minutes.do(main)
+    # schedule.every(60).to(90).minutes.do(main)
+    schedule.every().day.at("12:00").do(main)
+    schedule.every().day.at("16:00").do(main)
+    schedule.every().day.at("20:00").do(main)
 
 
     # schedule.every(10).seconds.do(main) # Execution every 60 sec
@@ -101,7 +104,6 @@ else:
     # schedule.every().hour.do(job)
     # schedule.every().day.at("10:30").do(job)
     # schedule.every().monday.do(job)
-    # schedule.every().wednesday.at("13:15").do(job)
     # schedule.every().minute.at(":17").do(job)
 
     while True:
