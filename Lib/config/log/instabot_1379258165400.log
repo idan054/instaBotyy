@@ -1,0 +1,14 @@
+2021-04-24 21:13:42,054 - instabot version: 0.117.0 (bot) - INFO - Instabot version: 0.117.0 Started
+2021-04-24 21:13:42,054 - instabot version: 0.117.0 (bot) - DEBUG - Bot imported from C:\Users\idanb\AppData\Local\Programs\Python\Python37\lib\site-packages\instabot\bot\bot.py
+2021-04-24 21:13:42,055 - instabot version: 0.117.0 (api_login) - INFO - Not yet logged in starting: PRE-LOGIN FLOW!
+2021-04-24 21:13:42,679 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/get_prefill_candidates/ returned response: <Response [200]>
+2021-04-24 21:13:43,261 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: qe/sync/ returned response: <Response [200]>
+2021-04-24 21:13:44,110 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: launcher/sync/ returned response: <Response [200]>
+2021-04-24 21:13:44,714 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/contact_point_prefill/ returned response: <Response [200]>
+2021-04-24 21:13:45,360 - instabot version: 0.117.0 (api) - DEBUG - POST to endpoint: accounts/login/ returned response: <Response [400]>
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - DEBUG - Responsecode indicates error; response content: b'{"message":"To secure your account, we\'ve reset your password. Tap \\"Get help signing in\\" on the login screen and follow the instructions to access your account.","status":"fail","error_type":"unusable_password"}'
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - ERROR - Request returns 400 error!
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - INFO - Instagram's error message: To secure your account, we've reset your password. Tap "Get help signing in" on the login screen and follow the instructions to access your account.
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - INFO - Error type: unusable_password
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - ERROR - Failed to login go to instagram and change your password
+2021-04-24 21:13:45,361 - instabot version: 0.117.0 (api) - INFO - Username or password is incorrect.

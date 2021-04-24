@@ -9,8 +9,11 @@ import pytz
 ## Values
 # from GlobalGadgets.googleDrive import g_drive_upload
 
+# USERNAME = "3deal.com_"
+# PASSWORD = "3deal3252"
 USERNAME = "spider3d_models"
 PASSWORD = "Idan05423"
+
 minutesPast_sinceLaunch = 0
 postIndex = 0
 
@@ -26,9 +29,12 @@ else:
 from Lib.I_CleanStart import clean_start
 ## 0. delete config folder & login
 # Only one time bot config
-bot = clean_start(USERNAME, PASSWORD, isSample)  # True / False for is sample upload only? (No insta login)
+bot, L = clean_start(USERNAME, PASSWORD, isSample)  # True / False for is sample upload only? (No insta login)
 
 def main():
+    print("Im in Beta, you cant use me!")
+    return
+
     global isSample
     # print(isSample)
     # start_time = datetime.datetime.now()
@@ -37,48 +43,49 @@ def main():
     start_time = start_time.strftime("%d/%m/%Y %H:%M:%S")
     print(start_time)
 
-    try:
-        print("Start main()")
-        global bot
-        print(bot) # When sample: bot = "Sample bot configured!"
+    # try:
 
-        from Lib.II_postGenerator import post_generator
-        post_data = post_generator(USERNAME)  # Get list of all the pages this user follow on
-        ## 2. Mapped post data
-        # print(post_data)
-        # region map scrape
-        page_username = post_data[0]
-        shortcode = post_data[1]
-        original_link = post_data[2]
-        photo_link = post_data[3]
-        is_videos = post_data[4]
-        video_link = post_data[5]
-        media_counter = post_data[6]
-        media_id = post_data[7]
-        caption_hashtags = post_data[8]
-        caption_mentions = post_data[9]
-        post_caption = post_data[10]
-        # endregion map scrape
+    print("Start main()")
+    global bot
+    print(bot) # When sample: bot = "Sample bot configured!"
 
-        from Lib.III_UploadPost import upload_post
-        ## 3. Delete REMOVE_ME & Upload the chosen post
-        post_code = upload_post(sample=isSample,
-                                bot=bot,
-                                photo_link=photo_link,
-                                post_caption=post_caption,
-                                page_username=page_username)  # for credit
-        ## 4. Telegram update
-        global postIndex
-        postIndex += 1
-        telegram_printer(
-            f"https://www.instagram.com/p/{post_code}/\n{postIndex} post Already upload since launch ({int(minutesPast_sinceLaunch / 60)} hours ago)")
-        if isSample:
-            telegram_printer(f"SAMPLE MODE instaBotyy run on pythonAnywhere\n{start_time}")
-        else:
-            telegram_printer(f"instaBotyy run on pythonAnywhere\n{start_time}")
-    except:
-        ## Export failure log to Gdrive & Send Telegram msg
-        telegram_printer(f"WOW. something went wrong on this upload...")
+    from Lib.II_postGenerator import post_generator
+    post_data = post_generator(USERNAME, L)  # Get list of all the pages this user follow on
+    ## 2. Mapped post data
+    # print(post_data)
+    # region map scrape
+    page_username = post_data[0]
+    shortcode = post_data[1]
+    original_link = post_data[2]
+    photo_link = post_data[3]
+    is_videos = post_data[4]
+    video_link = post_data[5]
+    media_counter = post_data[6]
+    media_id = post_data[7]
+    caption_hashtags = post_data[8]
+    caption_mentions = post_data[9]
+    post_caption = post_data[10]
+    # endregion map scrape
+
+    from Lib.III_UploadPost import upload_post
+    ## 3. Delete REMOVE_ME & Upload the chosen post
+    post_code = upload_post(sample=isSample,
+                            bot=bot,
+                            photo_link=photo_link,
+                            post_caption=post_caption,
+                            page_username=page_username)  # for credit
+    ## 4. Telegram update
+    global postIndex
+    postIndex += 1
+    telegram_printer(
+        f"https://www.instagram.com/p/{post_code}/\n{postIndex} post Already upload since launch ({int(minutesPast_sinceLaunch / 60)} hours ago)")
+    if isSample:
+        telegram_printer(f"SAMPLE MODE instaBotyy run on pythonAnywhere\n{start_time}")
+    else:
+        telegram_printer(f"instaBotyy run on pythonAnywhere\n{start_time}")
+    # except:
+        # Export failure log to Gdrive & Send Telegram msg
+        # telegram_printer(f"WOW. something went wrong on this upload...")
 
 main()
 

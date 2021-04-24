@@ -1,20 +1,28 @@
-from random import randint
 from instaloader import instaloader
+from random import randint
+from time import sleep
+
 
 ## 2. Scrape random post from USERNAME
 # the 5 - 50 last posts.
-def post_generator(username): # Get list of all the pages this user follow on
+
+# L = instaloader.Instaloader()
+# try: L.load_session_from_file("spider_modelsx")
+# print("Login 3deal.com_ for post_generator....")
+# L.login(user="3deal.com_", passwd="3deal3252")
+# L.login(user="spider3d_models", passwd="Idan05423")
+# print("L.login() Done")
+from Lib.I_CleanStart import clean_start
+
+bot, L = clean_start(username = "DoesntMatter",
+            password = "DoesntMatter",
+            sample = False
+            )
+def post_generator(username, _L): # Get list of all the pages this user follow on
 
     print("Start post_generator()")
 
-    L = instaloader.Instaloader()
-    # try: L.load_session_from_file("spider_modelsx")
-    print("Login 3deal.com_ ....")
-    L.login(user="3deal.com_", passwd="3deal3252")
-    # L.login(user="spider3d_models", passwd="Idan05423")
-    print("L.login() Done")
-
-    pages_data = instaloader.Profile.from_username(L.context, username).get_followees()
+    pages_data = instaloader.Profile.from_username(_L.context, username).get_followees()
     pages_list = []
     for page in pages_data:
         pages_list.append(page.username)
@@ -32,7 +40,7 @@ def post_generator(username): # Get list of all the pages this user follow on
     print("overall_post_options:", overall_post_option)
 
     # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
-    user = instaloader.Profile.from_username(L.context, pages_list[the_chosen_page]).get_posts()
+    user = instaloader.Profile.from_username(_L.context, pages_list[the_chosen_page]).get_posts()
 
     forIndex = 0
     the_chosen_post = randint(2, 49)
@@ -89,3 +97,9 @@ def post_generator(username): # Get list of all the pages this user follow on
                    post.caption
     #     L.download_post(post, target='stabilo')
     # print(forIndex)
+
+post_generator(username="nine", _L=L)
+print("Done generate nike")
+sleep(3)
+post_generator(username="adidas", _L=L)
+print("Done generate adidas")
