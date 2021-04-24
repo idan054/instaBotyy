@@ -32,9 +32,6 @@ from Lib.I_CleanStart import clean_start
 bot, L = clean_start(USERNAME, PASSWORD, isSample)  # True / False for is sample upload only? (No insta login)
 
 def main():
-    print("Im in Beta, you cant use me!")
-    return
-
     global isSample
     # print(isSample)
     # start_time = datetime.datetime.now()
@@ -50,7 +47,9 @@ def main():
     print(bot) # When sample: bot = "Sample bot configured!"
 
     from Lib.II_postGenerator import post_generator
-    post_data = post_generator(USERNAME, L)  # Get list of all the pages this user follow on
+
+    # print("L type is", type(L))
+    post_data = post_generator(_L = L, main_user = USERNAME)  # Get list of all the pages this user follow on
     ## 2. Mapped post data
     # print(post_data)
     # region map scrape

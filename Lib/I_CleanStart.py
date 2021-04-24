@@ -38,8 +38,8 @@ def clean_start(username, password, sample):
             print(f"Successfully logged in")
             # printYellow(f"Successfully logged in")
             return bot
-    # bot = instabot_login()
-    bot = "Sample bot configured!"
+    bot = instabot_login()
+    # bot = "Sample bot configured!"
     
     def instaloader_login():
         global bot, L

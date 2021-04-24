@@ -14,15 +14,12 @@ from time import sleep
 # print("L.login() Done")
 from Lib.I_CleanStart import clean_start
 
-bot, L = clean_start(username = "DoesntMatter",
-            password = "DoesntMatter",
-            sample = False
-            )
-def post_generator(username, _L): # Get list of all the pages this user follow on
+# main_user = Who to get pages he follow list. (AKA USERNAME)
+def post_generator(_L, main_user): # Get list of all the pages this user follow on
 
     print("Start post_generator()")
 
-    pages_data = instaloader.Profile.from_username(_L.context, username).get_followees()
+    pages_data = instaloader.Profile.from_username(_L.context, main_user).get_followees()
     pages_list = []
     for page in pages_data:
         pages_list.append(page.username)
@@ -52,6 +49,7 @@ def post_generator(username, _L): # Get list of all the pages this user follow o
         if forIndex != the_chosen_post:  # (When...)
             pass
         else:
+            print(f"@{post.owner_username}")
             print(post.url)
             # region post prints
             # print("post.get_is_videos()")
@@ -70,7 +68,6 @@ def post_generator(username, _L): # Get list of all the pages this user follow o
             ## print(post.mediaid_to_shortcode())
             ## print(post.shortcode_to_mediaid())
             # print("X___X___X___X___X___X___X___X___")
-            # print("post.owner_username")
             # print(post.owner_username)
             # print("post.title")
             # print(post.title)
@@ -98,8 +95,14 @@ def post_generator(username, _L): # Get list of all the pages this user follow o
     #     L.download_post(post, target='stabilo')
     # print(forIndex)
 
-post_generator(username="nine", _L=L)
-print("Done generate nike")
-sleep(3)
-post_generator(username="adidas", _L=L)
-print("Done generate adidas")
+
+## Example
+# bot, L = clean_start(username = "DoesntMatter",
+#             password = "DoesntMatter",
+#             sample = False
+#             )
+# post_generator(_L=L, main_user = "spider3d_models")
+# print("Done generate nike")
+# sleep(3)
+# post_generator(_L=L, main_user = "spider3d_models")
+# print("Done generate adidas")
