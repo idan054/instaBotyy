@@ -87,6 +87,10 @@ def main():
         # telegram_printer(f"WOW. something went wrong on this upload...")
 
 main()
+telegram_printer("Start 30 minutes sleep!")
+sleep(60*30)
+main()
+telegram_printer("Next uploads every day at 10 AM & 18 PM!")
 
 if isSample:
     print(isSample)
@@ -98,10 +102,13 @@ if isSample:
 else:
     print(isSample)
     # schedule.every(60).to(90).minutes.do(main)
-    schedule.every().day.at("12:00").do(main)
-    schedule.every().day.at("16:00").do(main)
-    schedule.every().day.at("20:00").do(main)
 
+    # schedule.every().day.at("12:00").do(main)
+    # schedule.every().day.at("16:00").do(main)
+    # schedule.every().day.at("20:00").do(main)
+
+    schedule.every().day.at("10:00").do(main)
+    schedule.every().day.at("18:00").do(main)
 
     # schedule.every(10).seconds.do(main) # Execution every 60 sec
     # schedule.every(2).hours.do(main)

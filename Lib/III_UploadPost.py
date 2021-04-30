@@ -1,3 +1,6 @@
+import os
+import urllib.request
+
 
 ## 3. Delete REMOVE_ME & Upload the chosen post
 
@@ -8,12 +11,11 @@ def upload_post(sample, bot, photo_link, post_caption, page_username):
     else: # On real upload.
         try:
             print('Delete "LastedPhoto.jpg.REMOVE_ME"')
-            import os
             os.remove('LastedPhoto.jpg.REMOVE_ME')
         except:
             print('Error Delete "LastedPhoto.jpg.REMOVE_ME"')
 
-        import urllib.request
+
         # photo_link = "https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/173546894_280575686881839_2838246774201218328_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=YpvNzQ3O4KwAX9hRIBy&edm=ALQROFkAAAAA&ccb=7-4&oh=604305744dd5d8cce792c6f093465488&oe=60A0E6D9&_nc_sid=30a2ef&ig_cache_key=MjU1MzM1Njc4NDQzNjE2OTUwNg%3D%3D.2-ccb7-4"
         urllib.request.urlretrieve(f"{photo_link}", "LastedPhoto.jpg")
 
