@@ -1,3 +1,5 @@
+import platform
+
 import telegram_send
 from GlobalGadgets.TelegramPrinter import telegram_printer
 from time import sleep
@@ -76,12 +78,13 @@ def main():
     ## 4. Telegram update
     global postIndex
     postIndex += 1
+    os_name = platform.system()
     telegram_printer(
         f"https://www.instagram.com/p/{post_code}/\n{postIndex} post Already upload since launch ({int(minutesPast_sinceLaunch / 60)} hours ago)")
     if isSample:
-        telegram_printer(f"SAMPLE MODE instaBotyy run on pythonAnywhere\n{start_time}")
+        telegram_printer(f"SAMPLE MODE instaBotyy run on {os_name}\n{start_time}")
     else:
-        telegram_printer(f"instaBotyy run on pythonAnywhere\n{start_time}")
+        telegram_printer(f"instaBotyy run on {os_name}\n{start_time}")
     # except:
         # Export failure log to Gdrive & Send Telegram msg
         # telegram_printer(f"WOW. something went wrong on this upload...")
