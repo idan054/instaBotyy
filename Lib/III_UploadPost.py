@@ -3,11 +3,16 @@ import urllib.request
 
 
 ## 3. Delete REMOVE_ME & Upload the chosen post
+from Lib.I_CleanStart import clean_start
 
-def upload_post(sample, bot, photo_link, post_caption, page_username):
+
+def upload_post(sample, _bot, photo_link, post_caption, page_username):
+    global orange_insta_hash
     if sample:
         # insta_hash = "000000000"
-        insta_hash = "CNxT8tPDe71" # Orange testing bot
+        orange_insta_hash = "CNxT8tPDe71" # Orange testing bot
+        # photo_link = f"https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/175486994_989882978491793_6819629786327322759_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=RteDikDW0UAAX_10Bvo&edm=AABBvjUBAAAA&ccb=7-4&oh=a146adced1dab5995018aa61286b349d&oe=60B0BC91&_nc_sid=83d603"
+        # photo_link= "https://www.instagram.com/p/CNxT8tPDe71/" # Orange testing bot
     else: # On real upload.
         try:
             print('Delete "LastedPhoto.jpg.REMOVE_ME"')
@@ -15,23 +20,32 @@ def upload_post(sample, bot, photo_link, post_caption, page_username):
         except:
             print('Error Delete "LastedPhoto.jpg.REMOVE_ME"')
 
-
-        # photo_link = "https://instagram.ftlv1-1.fna.fbcdn.net/v/t51.2885-15/e35/173546894_280575686881839_2838246774201218328_n.jpg?tp=1&_nc_ht=instagram.ftlv1-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=YpvNzQ3O4KwAX9hRIBy&edm=ALQROFkAAAAA&ccb=7-4&oh=604305744dd5d8cce792c6f093465488&oe=60A0E6D9&_nc_sid=30a2ef&ig_cache_key=MjU1MzM1Njc4NDQzNjE2OTUwNg%3D%3D.2-ccb7-4"
         urllib.request.urlretrieve(f"{photo_link}", "LastedPhoto.jpg")
 
     try:
-        response = bot.upload_photo("LastedPhoto.jpg",
-                         caption=f"""{post_caption}
+        response = _bot.upload_photo("LastedPhoto.jpg",
+                                     caption=f"""{post_caption}
                                  post credit:@{page_username}""")
 
         # print("response: ")
         # print(response)
         insta_hash = response["code"]
-    except ValueError as e:
+    except Exception as e:
+        # print("AAA")
         e = str(e)
-        insta_hash = f"\nNot Upload since: \n{e}\nC U NXT Time!"
+        insta_hash = f"{orange_insta_hash}\nNot Upload since: \n{e}\nC U NXT Time!"
+        print(insta_hash)
     return insta_hash
 
+
+
+## Example
+# bot, L = clean_start(username="3deal.com_", password="3deal3252", sample=True)
+# print(bot)
+# print(type(bot))
+
+upload_post(sample=True, _bot="Doesnt matter", photo_link="Doesnt matter",
+            post_caption="post_caption", page_username="3deal.com_")
 
 ## Response example:
 # {

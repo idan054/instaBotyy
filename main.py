@@ -69,7 +69,7 @@ def main():
     from Lib.III_UploadPost import upload_post
     ## 3. Delete REMOVE_ME & Upload the chosen post
     post_code = upload_post(sample=isSample,
-                            bot=bot,
+                            _bot=bot,
                             photo_link=photo_link,
                             post_caption=post_caption,
                             page_username=page_username)  # for credit

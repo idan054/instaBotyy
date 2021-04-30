@@ -39,6 +39,7 @@ def clean_start(username, password, sample):
             # printYellow(f"Successfully logged in")
             return bot
     bot = instabot_login()
+    print("bot", bot)
     # bot = "Sample bot configured!"
     
     def instaloader_login():
@@ -49,7 +50,9 @@ def clean_start(username, password, sample):
         L.login(user="3deal.com_", passwd="3deal3252")
         # L.login(user="spider3d_models", passwd="Idan05423")
         print("L.login() Done")
+        print("L", L)
         return L
     L = instaloader_login()
+    # L = None
     
     return bot, L
