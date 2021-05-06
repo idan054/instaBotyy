@@ -12,6 +12,7 @@ print("L.login() Done")
 
 # for post in instaloader.Hashtag.from_name(L.context, 'cat').get_posts():
 user = instaloader.Profile.from_username(L.context, "spider3d_models").get_posts()
+# user = instaloader.Profile.from_username(L.context, "spider3d_models").get_similar_accounts()
 # for post in user:
 #     L.download_post(post, target='stabilo')
 
